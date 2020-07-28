@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: To-Do List
-  description: This is a To-Do List
+  description: An API that allows companies to have an authorized To-Do List
   contact:
     email: you@your-company.com
   license:
@@ -43,7 +43,7 @@ paths:
       requestBody:
         description: Task updated
         content:
-          application/json:
+          application/yaml:
             schema:
               $ref: '#/components/schemas/Task'
       responses:
@@ -104,6 +104,6 @@ components:
         date:
           type: string
           format: date
-          example: 2022-03-07
+          example: 2020-07-27
         finished:
           type: boolean
