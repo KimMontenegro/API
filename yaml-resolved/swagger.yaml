@@ -25,7 +25,7 @@ paths:
         "200":
           description: success
           content:
-            application/json:
+            application/yaml:
               schema:
                 type: array
                 items:
@@ -62,7 +62,7 @@ paths:
       requestBody:
         description: Task added
         content:
-          application/json:
+          application/yaml:
             schema:
               $ref: '#/components/schemas/Task'
       responses:
