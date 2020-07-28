@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: To-Do List
+  description: This is a To-Do List
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 3.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/frustrated_dev/To-Do-List/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: Project Manager
+- name: Member
+paths:
+  /TASK:
+    get:
+      tags:
+      - Member
+      summary: gets Task
+      operationId: getTask
+      responses:
+        "200":
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        "400":
+          description: bad input
+        "500":
+          description: database error
+    put:
+      tags:
+      - Project Manager
+      summary: updates task
+      description: Updates a task
+      operationId: updateTask
+      requestBody:
+        description: Task updated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "201":
+          description: sucessfully updated!
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: The request could not be completed due to a conflict
+    post:
+      tags:
+      - Project Manager
+      summary: adds a task
+      description: Adds a task to the system
+      operationId: addTask
+      requestBody:
+        description: Task added
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        "201":
+          description: item created
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: an existing item already exists
+    delete:
+      tags:
+      - Project Manager
+      summary: deletes a task
+      description: Deletes a task to the system
+      operationId: deleteTask
+      responses:
+        "201":
+          description: sucessfully deleted!
+        "400":
+          description: invalid input, object invalid
+        "409":
+          description: The request could not be completed due to a conflict
+components:
+  schemas:
+    Task:
+      required:
+      - date
+      - finished
+      - id
+      - task
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        task:
+          type: string
+          example: Read about Rest API
+        date:
+          type: string
+          format: date
+          example: 2022-03-07
+        finished:
+          type: boolean
