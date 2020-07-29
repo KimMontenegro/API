@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: User Management
+  description: This can create, retrieve, update, and delete users
+  version: 3.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/frustrated_dev/User_Management/3.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /users:
+    get:
+      summary: Gets all users
+      operationId: getUsers
+      responses:
+        "200":
+          description: Sucessful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+        "400":
+          description: Bad request
+        "500":
+          description: Unexpected Error.
+    post:
+      summary: Add User
+      operationId: addUser
+      responses:
+        "200":
+          description: User Created!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+        "400":
+          description: Bad request.
+        "500":
+          description: Unexpected Error.
+  /users/{id}:
+    get:
+      summary: Gets a user by ID
+      operationId: get_userID
+      parameters:
+      - name: id
+        in: path
+        description: The user ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+        "400":
+          description: Bad request.
+        "500":
+          description: Unexpected Error
+    put:
+      summary: Updates an existing user with the specified ID
+      operationId: updateUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      - name: name of user
+        in: query
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Update Successful!
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+        "400":
+          description: Bad request.
+        "500":
+          description: Unexpected Error
+    delete:
+      summary: Delete a user
+      description: Delete a user to the system
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        description: The user ID
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successfully deleted a user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/users'
+        "400":
+          description: Bad request.
+        "500":
+          description: Unexpected Error
+components:
+  schemas:
+    users:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          example: Perseus Jackson
